@@ -14,4 +14,4 @@ To run on Android Studio using an emulator:
 5. Continue to run the application.
 
 Viewing the Server:
-To gain viewing access to the firebase serve, contact matthew.swerdon@sjsu.edu 
+To gain viewing access to the firebase server @ https://backtrackapp.page.link/Home, contact matthew.swerdon@sjsu.edu 
