@@ -186,7 +186,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
     private Boolean signIn(String email, String password)
     {
-
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
