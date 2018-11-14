@@ -173,8 +173,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                            //Toast.makeText(EmailPasswordActivity.this, "Authentication failed.",
-                              //      Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LoginActivity.this, "Authentication failed.",
+                                    Toast.LENGTH_SHORT).show();
                         }
 
                         // ...
@@ -200,8 +200,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithEmail:failure", task.getException());
-                            //Toast.makeText(EmailPasswordActivity.this, "Authentication failed.",
-                                    //Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LoginActivity.this, "Authentication failed.",
+                                    Toast.LENGTH_SHORT).show();
                         }
 
                         // ...
