@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "178179433363",
+    "firebase_url": "https://backtrack-cdd42.firebaseio.com",
+    "project_id": "backtrack-cdd42",
+    "storage_bucket": "backtrack-cdd42.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:178179433363:android:a13a080c0316e97d",
+        "android_client_info": {
+          "package_name": "com.example.matt.backtrack"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "178179433363-4faqets67jgt5at5fmqvoevpq39psb5a.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.matt.backtrack",
+            "certificate_hash": "c1ed7ca84c47ff8ae50c18883b5baa886026e08a"
+          }
+        },
+        {
+          "client_id": "178179433363-gvs97s1ufns65g1b4ghdlf7tp4mte206.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAxfzaikM5DqnS6XLn3gYRfdHmZy8aw0Ck"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "178179433363-gvs97s1ufns65g1b4ghdlf7tp4mte206.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
