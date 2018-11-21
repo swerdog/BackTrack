@@ -17,6 +17,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.Switch;
+import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
@@ -79,6 +80,10 @@ public class activity_second extends AppCompatActivity implements LocationListen
         Log.w("Location", "Location"+location.getLatitude());
         myRef.child(mAuth.getCurrentUser().getUid()).child("latitude").setValue(location.getLatitude());
         myRef.child(mAuth.getCurrentUser().getUid()).child("longitude").setValue(location.getLongitude());
+        TextView text_lat= (TextView) findViewById(R.id.text_view_latitude);
+        TextView text_long = (TextView) findViewById(R.id.text_view_longitude);
+        text_lat.setText(""+location.getLatitude()+",   ") ;
+        text_long.setText(""+location.getLongitude());
     }
 
     @Override
