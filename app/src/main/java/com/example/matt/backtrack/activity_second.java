@@ -58,7 +58,7 @@ public class activity_second extends AppCompatActivity implements LocationListen
         mAuth = FirebaseAuth.getInstance();
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("");
-        Log.w("Location", "Location"+location.getLatitude());
+        Log.w("Location", "Location12234"+location.getLatitude());
         myRef.child("users").child(mAuth.getCurrentUser().getUid()).child("latitude").setValue(location.getLatitude());
         myRef.child("users").child(mAuth.getCurrentUser().getUid()).child("longitude").setValue(location.getLongitude());
     }
