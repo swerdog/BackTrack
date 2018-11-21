@@ -14,6 +14,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.CompoundButton;
+import android.widget.Switch;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
@@ -30,6 +33,21 @@ public class activity_second extends AppCompatActivity implements LocationListen
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+
+
+        Switch switchButton = (Switch) findViewById(R.id.switch_location);
+        switchButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                mAuth = FirebaseAuth.getInstance();
+                FirebaseDatabase database = FirebaseDatabase.getInstance();
+                DatabaseReference myRef = database.getReference("users");
+                if (isChecked) {
+                    myRef.child(mAuth.getCurrentUser().getUid()).child("visibility").setValue("true");
+                } else {
+                    myRef.child(mAuth.getCurrentUser().getUid()).child("visibility").setValue("false");
+                }
+            }
+        });
         LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
@@ -50,17 +68,16 @@ public class activity_second extends AppCompatActivity implements LocationListen
 
 
 
-    //myRef.child(mAuth.getCurrentUser().getUid()).child("visibility").setValue();
 
 
     @Override
     public void onLocationChanged(Location location) {
         mAuth = FirebaseAuth.getInstance();
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("");
-        Log.w("Location", "Location12234"+location.getLatitude());
-        myRef.child("users").child(mAuth.getCurrentUser().getUid()).child("latitude").setValue(location.getLatitude());
-        myRef.child("users").child(mAuth.getCurrentUser().getUid()).child("longitude").setValue(location.getLongitude());
+        DatabaseReference myRef = database.getReference("users");
+        Log.w("Location", "Location"+location.getLatitude());
+        myRef.child(mAuth.getCurrentUser().getUid()).child("latitude").setValue(location.getLatitude());
+        myRef.child(mAuth.getCurrentUser().getUid()).child("longitude").setValue(location.getLongitude());
     }
 
     @Override
