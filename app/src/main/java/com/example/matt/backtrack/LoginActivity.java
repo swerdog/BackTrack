@@ -157,9 +157,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     }
 
 
-
-    private Boolean createAccount(String email, String password)
-    {
+    private Boolean createAccount(String email, String password) {
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -184,8 +182,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     }
 
 
-    private Boolean signIn(String email, String password)
-    {
+    private Boolean signIn(String email, String password) {
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -206,7 +203,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                         // ...
                     }
                 });
-    return true;
+        return true;
     }
 
 
@@ -229,14 +226,13 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         String password = mPasswordView.getText().toString();
 
 
-
         boolean cancel = false;
         View focusView = null;
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
 
-        if (user== null) {
+        if (user == null) {
             // There was an error; don't attempt login and focus the first
             // form field with an error.
             focusView.requestFocus();
