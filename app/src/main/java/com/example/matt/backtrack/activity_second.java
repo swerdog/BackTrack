@@ -97,10 +97,10 @@ public class activity_second extends AppCompatActivity implements LocationListen
         Log.w("Location", "Location" + location.getLatitude());
         myRef.child(mAuth.getCurrentUser().getUid()).child("latitude").setValue(location.getLatitude());
         myRef.child(mAuth.getCurrentUser().getUid()).child("longitude").setValue(location.getLongitude());
-//        TextView text_lat = (TextView) findViewById(R.id.text_view_latitude);
-//        TextView text_long = (TextView) findViewById(R.id.text_view_longitude);
-//        text_lat.setText("" + location.getLatitude() + ",   ");
-//        text_long.setText("" + location.getLongitude());
+        TextView text_lat = (TextView) findViewById(R.id.text_view_latitude);
+        TextView text_long = (TextView) findViewById(R.id.text_view_longitude);
+        text_lat.setText("" + location.getLatitude() + ",   ");
+        text_long.setText("" + location.getLongitude());
     }
 
     @Override
