@@ -30,9 +30,14 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+
 public class activity_second extends AppCompatActivity implements LocationListener {
 
     private FirebaseAuth mAuth;
+    private FirebaseAuth.AuthStateListener mAuthListener;
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,6 +82,15 @@ public class activity_second extends AppCompatActivity implements LocationListen
         }
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
 
+        Button buttonOne = (Button) findViewById(R.id.signout);
+        buttonOne.setOnClickListener( new View.OnClickListener()
+        {
+            public void onClick (View v){
+                onStop();
+            }
+
+        });
+
 
     }
 
@@ -86,6 +100,31 @@ public class activity_second extends AppCompatActivity implements LocationListen
                             startActivity(i);
 
     }
+
+//    public void stopActivity(View view)
+//    {
+//        mAuth = FirebaseAuth.getInstance();
+//        mAuth.signOut();
+//        Intent intent = new Intent(activity_second.this, LoginActivity.class);
+//        startActivity(intent);
+//        super.onStop();
+//        finish();
+//
+//    }
+
+    public void onStop(){
+        super.onStop();
+        mAuth = FirebaseAuth.getInstance();
+        mAuth.signOut();
+        Intent intent = new Intent(activity_second.this, LoginActivity.class);
+        startActivity(intent);
+
+        if (mAuthListener != null) {
+            mAuth.removeAuthStateListener(mAuthListener);
+
+        }
+    }
+
 
     @Override
     public void onLocationChanged(Location location) {
@@ -115,4 +154,6 @@ public class activity_second extends AppCompatActivity implements LocationListen
     public void onProviderDisabled(String provider) {
 
     }
+
+
 }

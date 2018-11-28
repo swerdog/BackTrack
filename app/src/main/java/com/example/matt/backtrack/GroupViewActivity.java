@@ -26,4 +26,5 @@ public class GroupViewActivity extends AppCompatActivity {
         });
     }
 
+
 }
