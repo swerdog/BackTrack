@@ -59,13 +59,14 @@ public class GroupViewActivity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 groups.setText("");
+                if(dataSnapshot.exists()){
                 DataSnapshot ds2 = dataSnapshot.child("users").child(mAuth.getCurrentUser().getUid()).child("groups");
                 for (DataSnapshot snap: ds2.getChildren())
                 {
                     String s = snap.getKey();
                     groups.setText(groups.getText()+"\n"+s);
                 }
-            }
+            }}
             @Override
             public void onCancelled(DatabaseError databaseError) {
                 System.out.println("The read failed: " + databaseError.getCode());
