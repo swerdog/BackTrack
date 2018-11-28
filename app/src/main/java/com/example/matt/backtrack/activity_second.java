@@ -49,8 +49,6 @@ public class activity_second extends AppCompatActivity implements LocationListen
             }
         });
 
-
-
         Switch switchButton = (Switch) findViewById(R.id.switch_location);
         switchButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
