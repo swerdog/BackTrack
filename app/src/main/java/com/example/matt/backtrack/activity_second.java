@@ -49,8 +49,6 @@ public class activity_second extends AppCompatActivity implements LocationListen
             }
         });
 
-
-
         Switch switchButton = (Switch) findViewById(R.id.switch_location);
         switchButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -99,7 +97,7 @@ public class activity_second extends AppCompatActivity implements LocationListen
         myRef.child(mAuth.getCurrentUser().getUid()).child("longitude").setValue(location.getLongitude());
         TextView text_lat = (TextView) findViewById(R.id.text_view_latitude);
         TextView text_long = (TextView) findViewById(R.id.text_view_longitude);
-        text_lat.setText("" + location.getLatitude() + ",   ");
+        text_lat.setText("Coordinates:  " + location.getLatitude() + ",   ");
         text_long.setText("" + location.getLongitude());
     }
 
