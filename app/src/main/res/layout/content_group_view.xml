@@ -8,4 +8,37 @@
     tools:context=".GroupViewActivity"
     tools:showIn="@layout/activity_group_view">
 
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
+        <TextView
+            android:id="@+id/groupsText"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="" />
+
+        <EditText
+            android:id="@+id/groupMapText"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:label="@string/group_id"
+            android:autofillHints="@string/GroupID"
+            android:inputType="text"
+            tools:ignore="LabelFor,UnusedAttribute" />
+
+        <Button
+            android:id="@+id/groupMapButton"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/go"/>
+
+    </LinearLayout>
+
 </android.support.constraint.ConstraintLayout>
