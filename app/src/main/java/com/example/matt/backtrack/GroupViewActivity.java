@@ -45,10 +45,7 @@ public class GroupViewActivity extends AppCompatActivity {
                 System.out.println("***************"+groupID+"*************");
                 Intent intent = new Intent(GroupViewActivity.this, MapsActivity.class);
                 intent.putExtra("EXTRA_GROUP_ID", groupID);
-                startActivity(intent);
-
-
-            }
+                startActivity(intent);            }
         });
 
         final TextView groups = (TextView) findViewById(R.id.groupsText);
