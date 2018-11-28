@@ -41,13 +41,23 @@ public class activity_second extends AppCompatActivity implements LocationListen
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        Button mEmailRegisterButton = (Button) findViewById(R.id.button_map);
-        mEmailRegisterButton.setOnClickListener(new View.OnClickListener() {
+        Button openMapButton = (Button) findViewById(R.id.button_map);
+        openMapButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 openMap();
             }
         });
+
+        Button createGroupButton = (Button) findViewById(R.id.createGroup);
+        createGroupButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                createGroupMethod();
+            }
+        });
+
+
 
         Switch switchButton = (Switch) findViewById(R.id.switch_location);
         switchButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -84,6 +94,13 @@ public class activity_second extends AppCompatActivity implements LocationListen
 
                             Intent i = new Intent(activity_second.this, MapsActivity.class);
                             startActivity(i);
+
+    }
+
+    private void createGroupMethod() {
+
+        Intent i = new Intent(activity_second.this, CreateGroupActivity.class);
+        startActivity(i);
 
     }
 
