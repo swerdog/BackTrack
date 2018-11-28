@@ -1,5 +1,6 @@
 package com.example.matt.backtrack;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
@@ -18,6 +19,8 @@ import android.widget.Toast;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.Random;
 
 public class CreateGroupActivity extends AppCompatActivity {
 
@@ -53,7 +56,12 @@ public class CreateGroupActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 click = true;
-                txt.setText("Some hashed ID");
+                Random r = new Random();
+                int n = 100000 + r.nextInt(900000);
+                String s = String.valueOf(n);
+                txt.setText(s);
+                butn.setEnabled(false);
+
             }
         });
 
@@ -88,6 +96,8 @@ public class CreateGroupActivity extends AppCompatActivity {
                 if(click==true&&result!=""){
                     createGrpButton.setText("Group Created");
                     joinButtonClickedMethod();
+                    Intent i = new Intent(CreateGroupActivity.this, activity_second.class);
+                    startActivity(i);
                 }
 
                 else {
