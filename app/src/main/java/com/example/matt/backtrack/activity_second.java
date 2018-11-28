@@ -96,21 +96,10 @@ public class activity_second extends AppCompatActivity implements LocationListen
 
     private void openMap() {
 
-                            Intent i = new Intent(activity_second.this, MapsActivity.class);
-                            startActivity(i);
+        Intent i = new Intent(activity_second.this, MapsActivity.class);
+        startActivity(i);
 
     }
-
-//    public void stopActivity(View view)
-//    {
-//        mAuth = FirebaseAuth.getInstance();
-//        mAuth.signOut();
-//        Intent intent = new Intent(activity_second.this, LoginActivity.class);
-//        startActivity(intent);
-//        super.onStop();
-//        finish();
-//
-//    }
 
     public void onStop(){
         super.onStop();
