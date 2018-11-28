@@ -6,10 +6,14 @@
     android:layout_height="match_parent"
     tools:context=".activity_second">
 
+
+
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:theme="@style/AppTheme.AppBarOverlay">
+
+
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
@@ -18,8 +22,81 @@
             android:background="?attr/colorPrimary"
             app:popupTheme="@style/AppTheme.PopupOverlay" />
 
+
     </android.support.design.widget.AppBarLayout>
+
+
 
     <include layout="@layout/content_activity_second" />
 
+    <android.support.constraint.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:id="@+id/viewGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="View Groups"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.088"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:layout_editor_absoluteY="469dp" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="207dp"
+            android:layout_height="45dp"
+            android:layout_marginStart="16dp"
+            android:text="View your joined groups"
+            app:layout_constraintStart_toEndOf="@+id/createGroup"
+            tools:layout_editor_absoluteY="469dp" />
+
+        <Button
+            android:id="@+id/joinGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="Join group"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.084"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:layout_editor_absoluteY="385dp" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="207dp"
+            android:layout_height="45dp"
+            android:layout_marginStart="16dp"
+            android:text="Join a group by pasting the code"
+            app:layout_constraintStart_toEndOf="@+id/createGroup"
+            tools:layout_editor_absoluteY="388dp" />
+
+        <Button
+            android:id="@+id/createGroup"
+            android:layout_width="114dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="Create Group"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.087"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:layout_editor_absoluteY="299dp" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="207dp"
+            android:layout_height="51dp"
+            android:layout_marginStart="16dp"
+            android:text="Create a new group and share the code of the group to add people "
+            app:layout_constraintStart_toEndOf="@+id/createGroup"
+            tools:layout_editor_absoluteY="299dp" />
+    </android.support.constraint.ConstraintLayout>
+
+
 </android.support.design.widget.CoordinatorLayout>
+

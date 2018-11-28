@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Button
+        android:id="@+id/viewGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="View Groups"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.096"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="361dp" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="207dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="16dp"
+        android:text="View your joined groups"
+        app:layout_constraintStart_toEndOf="@+id/createGroup"
+        tools:layout_editor_absoluteY="364dp" />
+
+    <Button
+        android:id="@+id/joinGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="Join group"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.125"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="265dp" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="207dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="16dp"
+        android:text="Join a group by pasting the code"
+        app:layout_constraintStart_toEndOf="@+id/createGroup"
+        tools:layout_editor_absoluteY="265dp" />
+
+    <Button
+        android:id="@+id/createGroup"
+        android:layout_width="114dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="Create Group"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.095"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="174dp" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="207dp"
+        android:layout_height="51dp"
+        android:layout_marginStart="16dp"
+        android:text="Create a new group and share the code of the group to add people "
+        app:layout_constraintStart_toEndOf="@+id/createGroup"
+        tools:layout_editor_absoluteY="174dp" />
+</android.support.constraint.ConstraintLayout>
