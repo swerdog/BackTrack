@@ -15,7 +15,10 @@
     <string name="title_activity_tracker">activity_tracker</string>
     <string name="location_access">Location Access</string>
     <string name="view_map">View Map</string>
-    <string name="title_activity_second">activity_second</string>
+    <string name="title_activity_second">Profile</string>
     <string name="title_activity_maps">Map</string>
-    <string name="title_activity_group_view">GroupViewActivity</string>
+    <string name="title_activity_group_view">Group List</string>
+    <string name="go">Go</string>
+    <string name="group_id">group ID</string>
+    <string name="GroupID">Enter group ID</string>
 </resources>
