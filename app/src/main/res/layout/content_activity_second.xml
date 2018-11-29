@@ -1,135 +1,133 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".activity_second"
-    tools:showIn="@layout/activity_second">
+    android:background="@drawable/gradient_background"
+    android:layout_height="match_parent">
+
 
     <Switch
         android:id="@+id/switch_location"
-        android:layout_width="213dp"
-        android:layout_height="72dp"
+        android:layout_width="333dp"
+        android:layout_height="31dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="120dp"
         android:layout_marginEnd="8dp"
         android:text="Location Access"
+        android:textColor="#F0F0F0"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.141"
+        app:layout_constraintHorizontal_bias="0.514"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/button_map"
-        android:layout_width="208dp"
-        android:layout_height="69dp"
+        android:layout_width="359dp"
+        android:layout_height="39dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
-        android:text="View Map"
+        android:background="@drawable/button_generate_id"
+        android:text="View Map "
+        android:textColor="#F0F0F0"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.35"
+        app:layout_constraintHorizontal_bias="0.505"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/switch_location" />
 
+    <Button
+        android:id="@+id/createGroup"
+        android:layout_width="301dp"
+        android:layout_height="55dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="56dp"
+        android:layout_marginEnd="8dp"
+        android:text="create group"
+        android:textColor="#F0F0F0"
+        android:background="@drawable/button_generate_id"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_map" />
 
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="bottom"
-        android:orientation="vertical">
+    <Button
+        android:id="@+id/viewGroup"
+        android:layout_width="301dp"
+        android:layout_height="55dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="92dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/button_generate_id"
+        android:text="view groups"
+        android:textColor="#F0F0F0"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/createGroup"
+        app:layout_constraintVertical_bias="0.0" />
 
-        <Button
-            android:id="@+id/viewGroup"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:text="View Groups"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.096"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:layout_editor_absoluteY="361dp" />
-
-        <TextView
-            android:id="@+id/textView3"
-            android:layout_width="207dp"
-            android:layout_height="45dp"
-            android:layout_marginStart="16dp"
-            android:text="View your joined groups"
-            app:layout_constraintStart_toEndOf="@+id/createGroup"
-            tools:layout_editor_absoluteY="364dp" />
-
-        <Button
-            android:id="@+id/joinGroup"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:text="Join group"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.125"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:layout_editor_absoluteY="265dp" />
-
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="207dp"
-            android:layout_height="45dp"
-            android:layout_marginStart="16dp"
-            android:text="Join a group by pasting the code"
-            app:layout_constraintStart_toEndOf="@+id/createGroup"
-            tools:layout_editor_absoluteY="265dp" />
-
-        <Button
-            android:id="@+id/createGroup"
-            android:layout_width="114dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:text="Create Group"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.095"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:layout_editor_absoluteY="174dp" />
-
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="207dp"
-            android:layout_height="51dp"
-            android:layout_marginStart="16dp"
-            android:text="Create a new group and share the code of the group to add people "
-            app:layout_constraintStart_toEndOf="@+id/createGroup"
-            tools:layout_editor_absoluteY="174dp" />
-
-        <Button
-            android:id="@+id/signout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:text="Signout" />
-
-    </LinearLayout>
+    <Button
+        android:id="@+id/joinGroup"
+        android:layout_width="301dp"
+        android:layout_height="55dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/button_generate_id"
+        android:text="join group"
+        android:textColor="#F0F0F0"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/createGroup" />
 
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginBottom="48dp"
-        app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
-        tools:layout_editor_absoluteX="0dp">
+    <TextView
+        android:id="@+id/text_view_latitude"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="2dp"
+        android:layout_marginBottom="8dp"
+        android:text="Latitude"
+        android:textColor="#F0F0F0"
+        app:layout_constraintBottom_toTopOf="@+id/switch_location"
+        app:layout_constraintEnd_toStartOf="@+id/text_view_longitude"
+        app:layout_constraintHorizontal_bias="0.327"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.505" />
 
+    <TextView
+        android:id="@+id/text_view_longitude"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="80dp"
+        android:layout_marginBottom="8dp"
+        android:text="Longitude"
+        android:textColor="#F0F0F0"
+        app:layout_constraintBottom_toTopOf="@+id/switch_location"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.505" />
 
-        <TextView
-            android:id="@+id/text_view_latitude"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Latitude" />
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/settings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:clickable="true"
+        app:backgroundTint="@color/colorPrimary"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/viewGroup"
+        app:srcCompat="@drawable/baseline_settings_black_18dp" />
 
-        <TextView
-            android:id="@+id/text_view_longitude"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Longitude" />
-    </LinearLayout>
 </android.support.constraint.ConstraintLayout>
