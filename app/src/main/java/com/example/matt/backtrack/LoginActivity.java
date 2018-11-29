@@ -85,8 +85,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         mEmailRegisterButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                attemptRegister();
-            }
+                Intent i = new Intent(LoginActivity.this, RegisterActivity.class);
+                startActivity(i);            }
         });
         Button mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
         mEmailSignInButton.setOnClickListener(new OnClickListener() {
@@ -216,6 +216,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             signIn(email, password);
         }
     }
+    /*
     private void attemptRegister() {
         if (mAuthTask != null) {
             return;
@@ -256,14 +257,14 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             mAuthTask.execute((Void) null);
             createAccount(email, password);
         }
-    }
+    }*/
     private boolean isEmailValid(String email) {
         //TODO: Replace this with your own logic
-        return email.contains("@");
+        return email.contains("@")&&email.contains(".")&&email.indexOf(".")!=0&&email.lastIndexOf('.')!=email.length()-1&&email.length()>=3;
     }
     private boolean isPasswordValid(String password) {
         //TODO: Replace this with your own logic
-        return password.length() > 4;
+        return password.length() >= 6;
     }
     /**
      * Shows the progress UI and hides the login form.
