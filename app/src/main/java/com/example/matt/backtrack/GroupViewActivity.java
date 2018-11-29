@@ -45,10 +45,7 @@ public class GroupViewActivity extends AppCompatActivity {
                 System.out.println("***************"+groupID+"*************");
                 Intent intent = new Intent(GroupViewActivity.this, MapsActivity.class);
                 intent.putExtra("EXTRA_GROUP_ID", groupID);
-                startActivity(intent);
-
-
-            }
+                startActivity(intent);            }
         });
 
         final TextView groups = (TextView) findViewById(R.id.groupsText);
@@ -63,8 +60,9 @@ public class GroupViewActivity extends AppCompatActivity {
                 DataSnapshot ds2 = dataSnapshot.child("users").child(mAuth.getCurrentUser().getUid()).child("groups");
                 for (DataSnapshot snap: ds2.getChildren())
                 {
-                    String s = snap.getKey();
-                    groups.setText(groups.getText()+"\n"+s);
+                    String group_name = snap.getKey();
+                    String group_uuid= snap.getValue(String.class);
+                    groups.setText(groups.getText()+"\n"+group_name+"  :  "+ group_uuid);
                 }
             }}
             @Override
