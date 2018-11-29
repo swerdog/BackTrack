@@ -85,6 +85,7 @@
                 android:layout_marginTop="16dp"
                 android:background="@drawable/button_generate_id"
                 android:text="Sign In"
+                android:textColor="#FFFF"
                 android:textStyle="bold" />
 
 
@@ -96,6 +97,7 @@
                 android:layout_marginTop="16dp"
                 android:background="@drawable/button_generate_id"
                 android:text="Register"
+                android:textColor="#FFFF"
                 android:textStyle="bold" />
 
 
