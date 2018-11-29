@@ -19,4 +19,5 @@
     <string name="title_activity_maps">Map</string>
     <string name="title_activity_group_view">GroupViewActivity</string>
     <string name="title_activity_join">JoinActivity</string>
+    <string name="title_activity_create_group">CreateGroupActivity</string>
 </resources>
