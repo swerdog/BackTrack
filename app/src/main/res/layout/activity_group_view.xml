@@ -20,14 +20,41 @@
 
     </android.support.design.widget.AppBarLayout>
 
+
+
+
     <include layout="@layout/content_group_view" />
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@android:drawable/ic_dialog_email" />
+        android:orientation="vertical"
+        android:gravity="bottom"
+        android:layout_marginTop="400dp">
+
+
+
+        <EditText
+            android:id="@+id/groupMapText"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:autofillHints="@string/GroupID"
+            android:inputType="text"
+            android:label="@string/group_id"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:visibility="visible"
+            tools:ignore="LabelFor,UnusedAttribute" />
+
+        <Button
+            android:id="@+id/groupMapButton"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/go"
+            android:visibility="visible" />
+
+    </LinearLayout>
+
+
 
 </android.support.design.widget.CoordinatorLayout>
