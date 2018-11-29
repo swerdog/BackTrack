@@ -18,4 +18,5 @@
     <string name="title_activity_second">activity_second</string>
     <string name="title_activity_maps">Map</string>
     <string name="title_activity_group_view">GroupViewActivity</string>
+    <string name="title_activity_join">JoinActivity</string>
 </resources>

@@ -49,6 +49,10 @@
         <activity
             android:name=".GroupViewActivity"
             android:label="@string/title_activity_group_view"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".JoinActivity"
+            android:label="@string/title_activity_join"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
