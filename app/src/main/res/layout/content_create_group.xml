@@ -17,6 +17,7 @@
         android:layout_marginTop="62dp"
         android:layout_marginBottom="8dp"
         android:hint="Create Group Name"
+        android:textColorHint="#f0f0f0"
         android:inputType="text"
         android:textColor="#FFFFFF"
         android:textSize="20dp"
