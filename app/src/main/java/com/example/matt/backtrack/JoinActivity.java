@@ -98,7 +98,7 @@ public class JoinActivity extends AppCompatActivity {
 //                        Toast.makeText(JoinActivity.this, groupId + " " + result,
 //                                Toast.LENGTH_SHORT).show();
 
-                        if (groupId.contains(result)) {
+                        if (groupId.equals(result)) {
                             checker = false;
                             Log.w("mycontainable1", toCheck);
                             mAuth = FirebaseAuth.getInstance();
@@ -113,13 +113,8 @@ public class JoinActivity extends AppCompatActivity {
                             joinButton.setEnabled(false);
 
                             JoinActivity.this.finish();
-
-
                         }
-
-
                     }
-
 
                     if (checker) {
                         Toast.makeText(JoinActivity.this, "No Such Group Exists, Please Try Again",
