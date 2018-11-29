@@ -29,7 +29,7 @@ public class activity_second extends AppCompatActivity implements LocationListen
 
     private FirebaseAuth mAuth;
     private boolean isAuthListenerSet = false;
-    private boolean finish_activity = true;
+    private static boolean finish_activity = true;
 
 
     @Override

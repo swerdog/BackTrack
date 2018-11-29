@@ -63,8 +63,10 @@ public class UpdatePasswordActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
 
-        TextView newPassword = (TextView) findViewById(R.id.newPassword);
-        password = newPassword.toString();
+        EditText text = (EditText) findViewById(R.id.newPasswordText);
+        password = text.getText().toString();
+
+
         Button button = (Button) findViewById(R.id.submitPassword);
         button.setOnClickListener( new View.OnClickListener()
         {

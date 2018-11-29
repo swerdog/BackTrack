@@ -56,8 +56,6 @@ public class SetActivity extends AppCompatActivity {
         });
 
 
-
-
         Button button = (Button) findViewById(R.id.UpdatePassord);
         button.setOnClickListener( new View.OnClickListener()
         {
@@ -77,7 +75,10 @@ public class SetActivity extends AppCompatActivity {
                 //User is signed in
             } else {
 
+
                 act.setBoolean(false);
+                Intent i = new Intent(SetActivity.this, LoginActivity.class);
+                startActivity(i);
                 SetActivity.this.finish();
             }
         }
