@@ -147,7 +147,7 @@ public class RegisterActivity extends AppCompatActivity {
                             Log.d("", "createUserWithEmail:success");
                             myRef.child(mAuth.getCurrentUser().getUid()).child("name").setValue(username);
                             mAuth.signOut();
-                            Toast.makeText(RegisterActivity.this, "Registration successfult",
+                            Toast.makeText(RegisterActivity.this, "Registration successful",
                                     Toast.LENGTH_SHORT).show();
                             RegisterActivity.this.finish();
                         } else {
