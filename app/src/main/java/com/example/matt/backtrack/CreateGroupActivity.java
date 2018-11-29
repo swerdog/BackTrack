@@ -85,8 +85,11 @@ public class CreateGroupActivity extends AppCompatActivity {
                 if(click==true&&result!=""){
                     createGrpButton.setText("Group Created");
                     joinButtonClickedMethod();
-                    Intent i = new Intent(CreateGroupActivity.this, activity_second.class);
-                    startActivity(i);
+                    //Intent i = new Intent(CreateGroupActivity.this, activity_second.class);
+                    //startActivity(i);
+                    Toast.makeText(CreateGroupActivity.this, "Group Created",
+                            Toast.LENGTH_SHORT).show();
+                    CreateGroupActivity.this.finish();
                 }
 
                 else {
@@ -165,9 +168,11 @@ public class CreateGroupActivity extends AppCompatActivity {
 
 
         EditText edit = (EditText)findViewById(R.id.idGroup);
-
-
         final String result = edit.getText().toString();
+
+        //TextView txt = (TextView) findViewById(R.id.genIDtxt);
+
+
 
         //Log.w("result123456",result);
 
@@ -179,8 +184,14 @@ public class CreateGroupActivity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("users");
-        myRef.child(mAuth.getCurrentUser().getUid()).child("groups").child(result).setValue("true");
+
+        DatabaseReference myRefUsers = database.getReference("users");
+        DatabaseReference myRefGroups = database.getReference("groups");
+
+
+        myRefUsers.child(mAuth.getCurrentUser().getUid()).child("groups").child(result).setValue(n);
+        myRefGroups.child(result).setValue(n);
+
 
 
 

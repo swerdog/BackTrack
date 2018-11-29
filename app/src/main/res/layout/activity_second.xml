@@ -20,6 +20,6 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/content_activity_second" />
+    <include layout="@layout/delete" />
 
 </android.support.design.widget.CoordinatorLayout>
