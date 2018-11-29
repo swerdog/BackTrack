@@ -55,7 +55,8 @@ public class GroupViewActivity extends AppCompatActivity {
         mDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                groups.setText("");
+                groups.setText("Groups \n");
+
                 if(dataSnapshot.exists()){
                 DataSnapshot ds2 = dataSnapshot.child("users").child(mAuth.getCurrentUser().getUid()).child("groups");
                 for (DataSnapshot snap: ds2.getChildren())
