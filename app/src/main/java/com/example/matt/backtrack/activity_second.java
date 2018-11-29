@@ -47,6 +47,15 @@ public class activity_second extends AppCompatActivity implements LocationListen
             }
         });
 
+        Button joinGroupButton = (Button) findViewById(R.id.joinGroup);
+        joinGroupButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                joinButtonMethod();
+            }
+        });
+
+
         Button createGroupButton = (Button) findViewById(R.id.createGroup);
         createGroupButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -167,6 +176,12 @@ public class activity_second extends AppCompatActivity implements LocationListen
         startActivity(i);
     }
 
+    private void joinButtonMethod() {
+
+        Intent i = new Intent(activity_second.this, JoinActivity.class);
+        startActivity(i);
+
+    }
     @Override
     public void onLocationChanged(Location location) {
         mAuth = FirebaseAuth.getInstance();

@@ -55,6 +55,10 @@
             android:label="@string/title_activity_create_group"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
+            android:name=".JoinActivity"
+            android:label="@string/title_activity_join"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
             android:name=".settingsPage"
             android:label="@string/title_activity_settings_page"
             android:theme="@style/AppTheme.NoActionBar"></activity>
