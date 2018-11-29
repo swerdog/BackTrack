@@ -322,6 +322,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         }
         addEmailsToAutoComplete(emails);
     }
+
     @Override
     public void onLoaderReset(Loader<Cursor> cursorLoader) {
     }

@@ -85,64 +85,64 @@ public class activity_second extends AppCompatActivity implements LocationListen
             return;
         }
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
-
-        FloatingActionButton buttonOne = (FloatingActionButton) findViewById(R.id.settings);
-        buttonOne.setOnClickListener( new View.OnClickListener()
-        {
-            public void onClick (View v){
-                mAuth = FirebaseAuth.getInstance();
-                mAuth.signOut();
-            }
-        });
-
+//
 //        FloatingActionButton buttonOne = (FloatingActionButton) findViewById(R.id.settings);
 //        buttonOne.setOnClickListener( new View.OnClickListener()
 //        {
 //            public void onClick (View v){
-//                Intent i = new Intent(activity_second.this, settingsPage.class);
-//                startActivity(i);
-//
+//                mAuth = FirebaseAuth.getInstance();
+//                mAuth.signOut();
 //            }
 //        });
+//
+        FloatingActionButton buttonOne = (FloatingActionButton) findViewById(R.id.settings);
+        buttonOne.setOnClickListener( new View.OnClickListener()
+        {
+            public void onClick (View v){
+                Intent i = new Intent(activity_second.this, SetActivity.class);
+                startActivity(i);
 
-
-
-
-
-
-    }
-
-    private FirebaseAuth.AuthStateListener mAuthListener = new FirebaseAuth.AuthStateListener() {
-        @Override
-        public void onAuthStateChanged(FirebaseAuth firebaseAuth) {
-            FirebaseUser user = firebaseAuth.getCurrentUser();
-            if (user != null) {
-                //User is signed in
-            } else {
-
-                finish_activity = false;
-                activity_second.this.finish();
             }
-        }
-    };
+        });
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        if (!isAuthListenerSet) {
-            FirebaseAuth.getInstance().addAuthStateListener(mAuthListener);
-            isAuthListenerSet = true;
-        }
     }
 
-    @Override
-    protected void onStop() {
-        super.onStop();
-        if (mAuthListener != null) {
-            FirebaseAuth.getInstance().removeAuthStateListener(mAuthListener);
-            isAuthListenerSet = false;
-        }
+    public void setBoolean(Boolean bool)
+    {
+        finish_activity  = bool;
     }
+
+//    private FirebaseAuth.AuthStateListener mAuthListener = new FirebaseAuth.AuthStateListener() {
+//        @Override
+//        public void onAuthStateChanged(FirebaseAuth firebaseAuth) {
+//            FirebaseUser user = firebaseAuth.getCurrentUser();
+//            if (user != null) {
+//                //User is signed in
+//            } else {
+//
+//                finish_activity = false;
+//                activity_second.this.finish();
+//            }
+//        }
+//    };
+//
+//    @Override
+//    protected void onStart() {
+//        super.onStart();
+//        if (!isAuthListenerSet) {
+//            FirebaseAuth.getInstance().addAuthStateListener(mAuthListener);
+//            isAuthListenerSet = true;
+//        }
+//    }
+//
+//    @Override
+//    protected void onStop() {
+//        super.onStop();
+//        if (mAuthListener != null) {
+//            FirebaseAuth.getInstance().removeAuthStateListener(mAuthListener);
+//            isAuthListenerSet = false;
+//        }
+//    }
 
 
     private void openMap() {
@@ -163,7 +163,9 @@ public class activity_second extends AppCompatActivity implements LocationListen
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("users");
         Log.w("Location", "Location" + location.getLatitude());
+        System.out.println(finish_activity);
         if (finish_activity != false) {
+
             myRef.child(mAuth.getCurrentUser().getUid()).child("latitude").setValue(location.getLatitude());
             myRef.child(mAuth.getCurrentUser().getUid()).child("longitude").setValue(location.getLongitude());
             TextView text_lat = (TextView) findViewById(R.id.text_view_latitude);

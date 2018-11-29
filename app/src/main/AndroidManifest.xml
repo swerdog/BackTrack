@@ -55,9 +55,13 @@
             android:label="@string/title_activity_create_group"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".settingsPage"
-            android:label="@string/title_activity_settings_page"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:name=".SetActivity"
+            android:label="@string/title_activity_set"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".UpdatePasswordActivity"
+            android:label="@string/title_activity_update_password"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>
