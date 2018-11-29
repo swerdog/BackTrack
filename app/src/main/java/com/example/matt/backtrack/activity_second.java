@@ -30,9 +30,13 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+
 public class activity_second extends AppCompatActivity implements LocationListener {
 
     private FirebaseAuth mAuth;
+    private boolean isAuthListenerSet = false;
+    private boolean finish_activity = true;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +52,6 @@ public class activity_second extends AppCompatActivity implements LocationListen
                 openMap();
             }
         });
-
         Button viewGroupButton = (Button) findViewById(R.id.viewGroup);
         viewGroupButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,7 +59,6 @@ public class activity_second extends AppCompatActivity implements LocationListen
                 viewGroups();
             }
         });
-
 
         Switch switchButton = (Switch) findViewById(R.id.switch_location);
         switchButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -86,8 +88,54 @@ public class activity_second extends AppCompatActivity implements LocationListen
         }
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
 
+        Button buttonOne = (Button) findViewById(R.id.signout);
+        buttonOne.setOnClickListener( new View.OnClickListener()
+        {
+            public void onClick (View v){
+                mAuth = FirebaseAuth.getInstance();
+                mAuth.signOut();
+
+            }
+        });
+
 
     }
+
+    private FirebaseAuth.AuthStateListener mAuthListener = new FirebaseAuth.AuthStateListener() {
+        @Override
+        public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+            FirebaseUser user = firebaseAuth.getCurrentUser();
+            if (user != null) {
+                //User is signed in
+            } else {
+
+                Intent intent = new Intent(activity_second.this, LoginActivity.class);
+                startActivity(intent);
+                finish_activity = false;
+
+            }
+        }
+    };
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if (!isAuthListenerSet) {
+            FirebaseAuth.getInstance().addAuthStateListener(mAuthListener);
+            isAuthListenerSet = true;
+        }
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if (mAuthListener != null) {
+            FirebaseAuth.getInstance().removeAuthStateListener(mAuthListener);
+            isAuthListenerSet = false;
+        }
+    }
+
+
 
     private void openMap() {
         Intent i = new Intent(activity_second.this, MapsActivity.class);
@@ -106,12 +154,14 @@ public class activity_second extends AppCompatActivity implements LocationListen
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("users");
         Log.w("Location", "Location" + location.getLatitude());
-        myRef.child(mAuth.getCurrentUser().getUid()).child("latitude").setValue(location.getLatitude());
-        myRef.child(mAuth.getCurrentUser().getUid()).child("longitude").setValue(location.getLongitude());
-        TextView text_lat = (TextView) findViewById(R.id.text_view_latitude);
-        TextView text_long = (TextView) findViewById(R.id.text_view_longitude);
-        text_lat.setText("Coordinates:  " + location.getLatitude() + ",   ");
-        text_long.setText("" + location.getLongitude());
+        if (finish_activity != false) {
+            myRef.child(mAuth.getCurrentUser().getUid()).child("latitude").setValue(location.getLatitude());
+            myRef.child(mAuth.getCurrentUser().getUid()).child("longitude").setValue(location.getLongitude());
+            TextView text_lat = (TextView) findViewById(R.id.text_view_latitude);
+            TextView text_long = (TextView) findViewById(R.id.text_view_longitude);
+            text_lat.setText("Coordinates:  " + location.getLatitude() + ",   ");
+            text_long.setText("" + location.getLongitude());
+        }
     }
 
     @Override
@@ -128,4 +178,6 @@ public class activity_second extends AppCompatActivity implements LocationListen
     public void onProviderDisabled(String provider) {
 
     }
+
+
 }
