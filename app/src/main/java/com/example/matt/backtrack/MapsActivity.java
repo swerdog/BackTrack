@@ -21,6 +21,8 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -53,6 +55,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, LocationListener {
@@ -69,6 +72,89 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+        Bundle extras = getIntent().getExtras();
+        String groupName=null;
+
+        if (extras != null) {
+            groupName = extras.getString("EXTRA_GROUP_ID");
+        }
+
+        if(groupName!=null)
+        {
+            //drawMarkers();
+        }
+
+    }
+
+    private void drawMarkers(final String groupUID) {
+        final FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference ref = database.getReference();
+        ref = ref.child("users");
+        ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                    //each ds represents a user!!
+                    for (DataSnapshot ds2 : ds.getChildren()) {
+                        boolean member = false;//if the user is in the targeted group
+                        String username=null;
+                        String latitude=null;
+                        String longitude=null;
+                        boolean visible=false;
+                        if (ds2.getKey().equals("groups"))
+                        {
+                            for(DataSnapshot ds3: ds2.getChildren())
+                            {
+                                if(ds3.getValue(String.class).equals(groupUID))
+                                {
+                                    member=true;
+                                }
+                            }
+                        }
+                        else if(ds2.getKey().equals("name"))
+                        {
+                            username = ds2.getValue(String.class);
+                        }
+                        else if(ds2.getKey().equals("latitude"))
+                        {
+                            latitude=ds2.getValue(String.class);
+                        }
+                       else if(ds2.getKey().equals("longitude"))
+                        {
+                            longitude=ds2.getValue(String.class);
+                        }
+                        else if(ds2.getKey().equals("visibility"))
+                        {
+                            visible = Boolean.parseBoolean(ds2.getValue(String.class));
+                        }
+                    }
+                }
+                    //Getting restaurents objects and storing it in an array
+//                    Restaurant restaurent = new Restaurant();
+//                    restaurent.setId(dataSnapshot1.child("ID").getValue().toString());
+//                    restaurent.setHours(dataSnapshot1.child("hours").getValue().toString());
+//                    restaurent.setLat(Double.parseDouble(dataSnapshot1.child("lat").getValue().toString()));
+//                    restaurent.setLongt(Double.parseDouble(dataSnapshot1.child("longt").getValue().toString()));
+//                    restaurent.setLocation(dataSnapshot1.child("location").getValue().toString());
+//                    restaurent.setType(dataSnapshot1.child("Type").getValue().toString());
+//                    restaurent.setName(dataSnapshot1.child("name").getValue().toString());
+//                    restaurent.setPhone(dataSnapshot1.child("phone").getValue().toString());
+//                    restaurent.setPrice(dataSnapshot1.child("price").getValue().toString());
+//                    restaurent.setWebsite(dataSnapshot1.child("website").getValue().toString());
+                   // array_restaurent.add(restaurent);
+                    //item.add(restaurent.getName() + ", " + restaurent.getLocation());
+
+
+                //setAllRestaurents(array_restaurent);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
     }
 
 
@@ -134,6 +220,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         this.longitude = location.getLongitude();
 
         mMap.clear();
+
+        //TODO:call redraw all markers
 
         MarkerOptions mp = new MarkerOptions();
 
