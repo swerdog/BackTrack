@@ -188,9 +188,9 @@ public class CreateGroupActivity extends AppCompatActivity {
         DatabaseReference myRefUsers = database.getReference("users");
         DatabaseReference myRefGroups = database.getReference("groups");
 
-
-        myRefUsers.child(mAuth.getCurrentUser().getUid()).child("groups").child(result).setValue(n);
-        myRefGroups.child(result).setValue(n);
+        String g = ""+n;
+        myRefUsers.child(mAuth.getCurrentUser().getUid()).child("groups").child(result).setValue(g);
+        myRefGroups.child(result).setValue(g);
 
 
 

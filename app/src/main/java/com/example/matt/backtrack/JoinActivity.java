@@ -92,7 +92,7 @@ public class JoinActivity extends AppCompatActivity {
                         Log.w("mycontainable", result);
 
                         String groupName = issue.getKey();
-                        long groupId1 = (long) issue.getValue();
+                        String groupId1 = (String) issue.getValue();
                         String groupId = "" + groupId1;
 
 //                        Toast.makeText(JoinActivity.this, groupId + " " + result,
