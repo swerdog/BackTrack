@@ -22,11 +22,11 @@
         android:layout_marginBottom="8dp"
         android:visibility="gone" />
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="224dp"
-        android:layout_height="150dp"
-        app:srcCompat="@drawable/logo" />
+    <!--<ImageView-->
+        <!--android:id="@+id/imageView"-->
+        <!--android:layout_width="224dp"-->
+        <!--android:layout_height="150dp"-->
+        <!--app:srcCompat="@drawable/logo" />-->
 
     <ScrollView
         android:id="@+id/login_form"
