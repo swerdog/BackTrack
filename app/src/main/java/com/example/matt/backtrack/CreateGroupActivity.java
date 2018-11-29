@@ -106,17 +106,33 @@ public class CreateGroupActivity extends AppCompatActivity {
         });
 
         copy_button =(Button) findViewById(R.id.copybutton);
-        if (n==0) copy_button.setEnabled(false);
-        else {
+       // if (n==0) copy_button.setEnabled(false);
+        //else {
             copy_button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    String copy= txt.getText().toString();
-                    ClipboardManager clipboardManager = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
-                    clipboardManager.setText(copy);
+
+                    if(click==true) {
+                        String copy= txt.getText().toString();
+                        ClipboardManager clipboardManager = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
+                        clipboardManager.setText(copy);
+                        copy_button.setText("id copied");
+                    }
+                    else {
+                        copy_button.setText("Generate ID first");
+                        final Handler handler = new Handler();
+                        handler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                copy_button.setText("Copy id");//Do something after 100ms
+                            }
+                        }, 2000);
+                    }
+
+
                 }
             });
-        }
+        //}
 
 
     }
