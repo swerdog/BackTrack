@@ -21,6 +21,8 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -53,6 +55,12 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
+
+import org.json.JSONObject;
+
+import java.util.HashMap;
 
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, LocationListener {
@@ -69,7 +77,82 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-    }
+
+        Bundle extras = getIntent().getExtras();
+        String groupName=null;
+
+        if (extras != null) {
+            groupName = extras.getString("EXTRA_GROUP_ID");
+            System.out.println("aaxxoo the group Id: " + groupName);
+        }
+
+        final FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference ref = database.getReference();
+
+        final String finalGroupName = groupName;
+        ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                    //each ds represents a user!!
+                    String a = ds.getKey();
+                    if (a.equals("users")) {
+                        for (DataSnapshot ds2 : ds.getChildren()) {
+
+                            HashMap<Object, Object> users = (HashMap<Object, Object>) ds2.getValue();
+                            HashMap<Object, Object> groups = (HashMap<Object, Object>) users.get("groups");
+
+                            System.out.println("name123: "+ users);
+                            System.out.println("name123: "+ groups);
+
+                            if(groups!=null)
+                            {
+                                if(groups.containsValue(finalGroupName))
+                                {
+                                    if(users.containsKey("visibility") && users.containsKey("name") && users.containsKey("latitude") && users.containsKey("longitude") && users.containsValue("true"))
+                                    {
+                                        Object lat = users.get("latitude");
+                                        lat = Double.parseDouble(lat.toString());
+
+                                        Object longit = users.get("longitude");
+                                        longit = Double.parseDouble(longit.toString());
+
+                                        Object username = users.get("name");
+
+                                        MarkerOptions mp = new MarkerOptions();
+                                        mp.position(new LatLng((double)lat,(double)longit));
+                                        mp.title((String) username);
+                                        mMap.addMarker(mp);
+
+                                    }
+                                    else
+                                    {
+                                        continue;
+                                    }
+                                }
+                                else
+                                    {
+                                    continue;
+                                }
+                            }
+                            else
+                            {
+                                continue;
+                            }
+
+                        }
+                    }
+
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+}
 
 
     /**
@@ -133,7 +216,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         this.latitude = location.getLatitude();
         this.longitude = location.getLongitude();
 
-        mMap.clear();
+//        mMap.clear();
+
+
 
         MarkerOptions mp = new MarkerOptions();
 
