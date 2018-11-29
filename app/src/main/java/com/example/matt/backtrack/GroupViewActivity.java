@@ -41,7 +41,7 @@ public class GroupViewActivity extends AppCompatActivity {
         setContentView(R.layout.activity_group_view);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        check_id = true;
+        check_id = false;
         Button button = (Button) findViewById(R.id.groupMapButton);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -49,7 +49,7 @@ public class GroupViewActivity extends AppCompatActivity {
                 EditText textfield = (EditText) findViewById(R.id.groupMapText);
                 final String groupID = textfield.getText().toString();
                 System.out.println("***************" + groupID + "*************");
-                Intent intent = new Intent(GroupViewActivity.this, MapsActivity.class);
+                final Intent intent = new Intent(GroupViewActivity.this, MapsActivity.class);
 
 
                 Query a = FirebaseDatabase.getInstance().getReference("groups");
@@ -64,14 +64,19 @@ public class GroupViewActivity extends AppCompatActivity {
                                 String groupId1 = (String) issue.getValue();
                                 String groupId = "" + groupId1;
                                 if (groupId.equals(groupID)) {
-                                    check_id = false;
+                                    check_id = true;
                                     break;
                                 }
                             }
-                            if(check_id)
+                            if(!check_id)
                             {
                                 Toast.makeText(GroupViewActivity.this, "Group Doesnt Exist",
                                         Toast.LENGTH_SHORT).show();
+                            }
+                            if (check_id) {
+                                intent.putExtra("EXTRA_GROUP_ID", groupID);
+                                startActivity(intent);
+                                check_id = false;
                             }
                         }
                     }
@@ -83,11 +88,7 @@ public class GroupViewActivity extends AppCompatActivity {
                 });
 
 
-                if (!check_id) {
-                    intent.putExtra("EXTRA_GROUP_ID", groupID);
-                    startActivity(intent);
-                    check_id = true;
-                }
+
 
 
             }
