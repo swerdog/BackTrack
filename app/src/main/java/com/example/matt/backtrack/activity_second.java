@@ -52,8 +52,13 @@ public class activity_second extends AppCompatActivity implements LocationListen
                 openMap();
             }
         });
-
-
+        Button viewGroupButton = (Button) findViewById(R.id.viewGroup);
+        viewGroupButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                viewGroups();
+            }
+        });
         Switch switchButton = (Switch) findViewById(R.id.switch_location);
         switchButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -132,6 +137,12 @@ public class activity_second extends AppCompatActivity implements LocationListen
 
     private void openMap() {
         Intent i = new Intent(activity_second.this, MapsActivity.class);
+        startActivity(i);
+    }
+
+
+    private void viewGroups(){
+        Intent i = new Intent(activity_second.this, GroupViewActivity.class);
         startActivity(i);
     }
 
