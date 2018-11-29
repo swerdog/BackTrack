@@ -1,5 +1,6 @@
 package com.example.matt.backtrack;
 
+import android.content.ClipboardManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -32,6 +33,8 @@ public class CreateGroupActivity extends AppCompatActivity {
     boolean click = false;
     private Button buttonConfirm;
     private EditText editGroupName;
+    Button copy_button;
+    int n;
 
 
     @Override
@@ -57,7 +60,7 @@ public class CreateGroupActivity extends AppCompatActivity {
             public void onClick(View v) {
                 click = true;
                 Random r = new Random();
-                int n = 100000 + r.nextInt(900000);
+                n = 100000 + r.nextInt(900000);
                 String s = String.valueOf(n);
                 txt.setText(s);
                 butn.setEnabled(false);
@@ -73,20 +76,6 @@ public class CreateGroupActivity extends AppCompatActivity {
         createGrpButton = (Button) findViewById(R.id.buttonCreate);
         editGroupName.addTextChangedListener(loginTextWatcher);
 
-        /*createGrpButton1 = (Button) findViewById(R.id.buttonCreate);
-        createGrpButton1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                createGrpButton1.setText("Enter Name First");
-                final Handler handler = new Handler();
-                handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        createGrpButton1.setText("Create Group");//Do something after 100ms
-                    }
-                }, 2000);
-            }
-        });*/
 
 
         createGrpButton.setOnClickListener(new View.OnClickListener() {
@@ -115,6 +104,21 @@ public class CreateGroupActivity extends AppCompatActivity {
             }
 
         });
+
+        copy_button =(Button) findViewById(R.id.copybutton);
+        if (n==0) copy_button.setEnabled(false);
+        else {
+            copy_button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    String copy= txt.getText().toString();
+                    ClipboardManager clipboardManager = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
+                    clipboardManager.setText(copy);
+                }
+            });
+        }
+
+
     }
 
     private TextWatcher loginTextWatcher = new TextWatcher() {
