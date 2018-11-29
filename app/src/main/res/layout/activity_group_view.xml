@@ -41,6 +41,7 @@
             android:autofillHints="@string/GroupID"
             android:hint="Enter Group Number"
             android:textColorHint="#ffff"
+            android:textColor="#ffff"
             android:inputType="text"
             android:label="@string/group_id"
             android:maxLines="1"
