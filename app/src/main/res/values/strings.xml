@@ -17,6 +17,8 @@
     <string name="view_map">View Map</string>
     <string name="title_activity_second">Profile</string>
     <string name="title_activity_maps">Map</string>
+    <string name="title_activity_create_group">CreateGroupActivity</string>
+    <string name="title_activity_settings_page">settingsPage</string>
     <string name="title_activity_group_view">Group List</string>
     <string name="go">Go</string>
     <string name="group_id">group ID</string>
