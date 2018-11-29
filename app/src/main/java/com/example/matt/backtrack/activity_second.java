@@ -34,9 +34,8 @@ import com.google.firebase.database.FirebaseDatabase;
 public class activity_second extends AppCompatActivity implements LocationListener {
 
     private FirebaseAuth mAuth;
-    private FirebaseAuth.AuthStateListener mAuthListener;
-
-
+    private boolean isAuthListenerSet = false;
+    private boolean finish_activity = true;
 
 
     @Override
@@ -53,6 +52,7 @@ public class activity_second extends AppCompatActivity implements LocationListen
                 openMap();
             }
         });
+
 
         Switch switchButton = (Switch) findViewById(R.id.switch_location);
         switchButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -86,34 +86,54 @@ public class activity_second extends AppCompatActivity implements LocationListen
         buttonOne.setOnClickListener( new View.OnClickListener()
         {
             public void onClick (View v){
-                onStop();
-            }
+                mAuth = FirebaseAuth.getInstance();
+                mAuth.signOut();
 
+            }
         });
 
 
     }
 
-    private void openMap() {
+    private FirebaseAuth.AuthStateListener mAuthListener = new FirebaseAuth.AuthStateListener() {
+        @Override
+        public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+            FirebaseUser user = firebaseAuth.getCurrentUser();
+            if (user != null) {
+                //User is signed in
+            } else {
 
-        Intent i = new Intent(activity_second.this, MapsActivity.class);
-        startActivity(i);
+                Intent intent = new Intent(activity_second.this, LoginActivity.class);
+                startActivity(intent);
+                finish_activity = false;
 
-    }
+            }
+        }
+    };
 
-    public void onStop(){
-        super.onStop();
-        mAuth = FirebaseAuth.getInstance();
-        mAuth.signOut();
-        Intent intent = new Intent(activity_second.this, LoginActivity.class);
-        startActivity(intent);
-
-        if (mAuthListener != null) {
-            mAuth.removeAuthStateListener(mAuthListener);
-
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if (!isAuthListenerSet) {
+            FirebaseAuth.getInstance().addAuthStateListener(mAuthListener);
+            isAuthListenerSet = true;
         }
     }
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if (mAuthListener != null) {
+            FirebaseAuth.getInstance().removeAuthStateListener(mAuthListener);
+            isAuthListenerSet = false;
+        }
+    }
+
+
+    private void openMap() {
+        Intent i = new Intent(activity_second.this, MapsActivity.class);
+        startActivity(i);
+    }
 
     @Override
     public void onLocationChanged(Location location) {
@@ -121,12 +141,14 @@ public class activity_second extends AppCompatActivity implements LocationListen
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("users");
         Log.w("Location", "Location" + location.getLatitude());
-        myRef.child(mAuth.getCurrentUser().getUid()).child("latitude").setValue(location.getLatitude());
-        myRef.child(mAuth.getCurrentUser().getUid()).child("longitude").setValue(location.getLongitude());
-        TextView text_lat = (TextView) findViewById(R.id.text_view_latitude);
-        TextView text_long = (TextView) findViewById(R.id.text_view_longitude);
-        text_lat.setText("Coordinates:  " + location.getLatitude() + ",   ");
-        text_long.setText("" + location.getLongitude());
+        if (finish_activity != false) {
+            myRef.child(mAuth.getCurrentUser().getUid()).child("latitude").setValue(location.getLatitude());
+            myRef.child(mAuth.getCurrentUser().getUid()).child("longitude").setValue(location.getLongitude());
+            TextView text_lat = (TextView) findViewById(R.id.text_view_latitude);
+            TextView text_long = (TextView) findViewById(R.id.text_view_longitude);
+            text_lat.setText("Coordinates:  " + location.getLatitude() + ",   ");
+            text_long.setText("" + location.getLongitude());
+        }
     }
 
     @Override
