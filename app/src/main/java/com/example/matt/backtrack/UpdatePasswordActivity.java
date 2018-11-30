@@ -71,10 +71,6 @@ public class UpdatePasswordActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-
-//        EditText text = (EditText) findViewById(R.id.newPasswordText);
-//        password = text.getText().toString();
-
         newPasswordText = (TextInputEditText) findViewById(R.id.newPasswordText);
         newPassword = (TextInputLayout) findViewById(R.id.newPassword);
 

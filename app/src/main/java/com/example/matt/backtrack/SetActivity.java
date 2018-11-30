@@ -40,6 +40,7 @@ public class SetActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private boolean isAuthListenerSet = false;
     activity_second act = new activity_second();
+    MapsActivity maps = new MapsActivity();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,10 +77,23 @@ public class SetActivity extends AppCompatActivity {
             } else {
 
 
+//                act.setBoolean(false);
+//                maps.setBoolean(false);
+////                setResult(RESULT_OK);
+//                finishActivity();
+//                Intent i = new Intent(SetActivity.this, LoginActivity.class);
+//                startActivity(i);
+
+//                SetActivity.this.finishAffinity();
+
                 act.setBoolean(false);
-                Intent i = new Intent(SetActivity.this, LoginActivity.class);
-                startActivity(i);
-                SetActivity.this.finish();
+                maps.setBoolean(false);
+                Intent intent = new Intent(SetActivity.this, activity_second.class);
+                intent.putExtra("finish", true);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP); // To clean up all activities
+                startActivity(intent);
+                finish();
+
             }
         }
     };

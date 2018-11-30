@@ -35,7 +35,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import java.util.ArrayList;
 import java.util.List;
-import static android.Manifest.permission.READ_CONTACTS;
+//import static android.Manifest.permission.READ_CONTACTS;
 /**
  * A login screen that offers login via email/password.
  */
@@ -81,12 +81,18 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 return false;
             }
         });
+
+        boolean finish = getIntent().getBooleanExtra("finish", false);
+        if (finish) {
+            this.finish();
+            return;
+        }
         Button mEmailRegisterButton = (Button) findViewById(R.id.email_register_button);
         mEmailRegisterButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                attemptRegister();
-            }
+                Intent i = new Intent(LoginActivity.this, RegisterActivity.class);
+                startActivity(i);            }
         });
         Button mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
         mEmailSignInButton.setOnClickListener(new OnClickListener() {
@@ -99,11 +105,11 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         mProgressView = findViewById(R.id.login_progress);
     }
     private void populateAutoComplete() {
-        if (!mayRequestContacts()) {
+        /*if (!mayRequestContacts()) {
             return;
         }
-        getLoaderManager().initLoader(0, null, this);
-    }
+        getLoaderManager().initLoader(0, null, this);*/
+    }/*
     private boolean mayRequestContacts() {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
             return true;
@@ -124,7 +130,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             requestPermissions(new String[]{READ_CONTACTS}, REQUEST_READ_CONTACTS);
         }
         return false;
-    }
+    }*/
     /**
      * Callback received when a permissions request has been completed.
      */
@@ -216,6 +222,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             signIn(email, password);
         }
     }
+    /*
     private void attemptRegister() {
         if (mAuthTask != null) {
             return;
@@ -256,14 +263,14 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             mAuthTask.execute((Void) null);
             createAccount(email, password);
         }
-    }
+    }*/
     private boolean isEmailValid(String email) {
         //TODO: Replace this with your own logic
-        return email.contains("@");
+        return email.contains("@")&&email.contains(".")&&email.indexOf(".")!=0&&email.lastIndexOf('.')!=email.length()-1&&email.length()>=3;
     }
     private boolean isPasswordValid(String password) {
         //TODO: Replace this with your own logic
-        return password.length() > 4;
+        return password.length() >= 6;
     }
     /**
      * Shows the progress UI and hides the login form.

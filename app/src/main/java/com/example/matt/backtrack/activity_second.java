@@ -39,6 +39,20 @@ public class activity_second extends AppCompatActivity implements LocationListen
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+
+        boolean finish = getIntent().getBooleanExtra("finish", false);
+        if (finish) {
+//            startActivity(new Intent(activity_second.this, LoginActivity.class));
+
+            Intent intent = new Intent(activity_second.this, LoginActivity.class);
+            intent.putExtra("finish", true);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            System.out.println("FFFFFFFFFFFFFFFFFFFFFFFFF");
+            finish();
+            // To clean up all activities
+            startActivity(intent);
+        }
+
         Button openMapButton = (Button) findViewById(R.id.button_map);
         openMapButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -47,17 +61,32 @@ public class activity_second extends AppCompatActivity implements LocationListen
             }
         });
 
+        Button joinGroupButton = (Button) findViewById(R.id.joinGroup);
+        joinGroupButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                joinButtonMethod();
+            }
+        });
+
+
         Button createGroupButton = (Button) findViewById(R.id.createGroup);
         createGroupButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 createGroupMethod();
+              
+            }
+        });
+        Button viewGroupButton = (Button) findViewById(R.id.viewGroup);
+        viewGroupButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                viewGroups();
             }
         });
 
 
-
-        //Switch switchButton = (Switch) findViewById(R.id.button_map);
         Switch switchButton = (Switch) findViewById(R.id.switch_location);
         switchButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -76,25 +105,10 @@ public class activity_second extends AppCompatActivity implements LocationListen
             // TODO: Consider calling
             requestPermissions(
                     new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 99);
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
             return;
         }
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
-//
-//        FloatingActionButton buttonOne = (FloatingActionButton) findViewById(R.id.settings);
-//        buttonOne.setOnClickListener( new View.OnClickListener()
-//        {
-//            public void onClick (View v){
-//                mAuth = FirebaseAuth.getInstance();
-//                mAuth.signOut();
-//            }
-//        });
-//
+
         FloatingActionButton buttonOne = (FloatingActionButton) findViewById(R.id.settings);
         buttonOne.setOnClickListener( new View.OnClickListener()
         {
@@ -112,39 +126,19 @@ public class activity_second extends AppCompatActivity implements LocationListen
         finish_activity  = bool;
     }
 
-//    private FirebaseAuth.AuthStateListener mAuthListener = new FirebaseAuth.AuthStateListener() {
-//        @Override
-//        public void onAuthStateChanged(FirebaseAuth firebaseAuth) {
-//            FirebaseUser user = firebaseAuth.getCurrentUser();
-//            if (user != null) {
-//                //User is signed in
-//            } else {
-//
-//                finish_activity = false;
-//                activity_second.this.finish();
-//            }
-//        }
-//    };
-//
-//    @Override
-//    protected void onStart() {
-//        super.onStart();
-//        if (!isAuthListenerSet) {
-//            FirebaseAuth.getInstance().addAuthStateListener(mAuthListener);
-//            isAuthListenerSet = true;
-//        }
-//    }
-//
-//    @Override
-//    protected void onStop() {
-//        super.onStop();
-//        if (mAuthListener != null) {
-//            FirebaseAuth.getInstance().removeAuthStateListener(mAuthListener);
-//            isAuthListenerSet = false;
-//        }
-//    }
+    @Override
+    protected void onActivityResult(int requextCode, int resultCode, Intent data)
+    {
+        activity_second.this.finish();
+    }
 
 
+    private FirebaseAuth.AuthStateListener mAuthListener = new FirebaseAuth.AuthStateListener() {
+        @Override
+        public void onAuthStateChanged(FirebaseAuth firebaseAuth) {
+                activity_second.this.finish();
+        }
+    };
     private void openMap() {
         Intent i = new Intent(activity_second.this, MapsActivity.class);
         startActivity(i);
@@ -154,16 +148,25 @@ public class activity_second extends AppCompatActivity implements LocationListen
 
         Intent i = new Intent(activity_second.this, CreateGroupActivity.class);
         startActivity(i);
+}
 
+    private void viewGroups(){
+        Intent i = new Intent(activity_second.this, GroupViewActivity.class);
+        startActivity(i);
     }
 
+    private void joinButtonMethod() {
+
+        Intent i = new Intent(activity_second.this, JoinActivity.class);
+        startActivity(i);
+
+    }
     @Override
     public void onLocationChanged(Location location) {
         mAuth = FirebaseAuth.getInstance();
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("users");
         Log.w("Location", "Location" + location.getLatitude());
-        System.out.println(finish_activity);
         if (finish_activity != false) {
 
             myRef.child(mAuth.getCurrentUser().getUid()).child("latitude").setValue(location.getLatitude());
