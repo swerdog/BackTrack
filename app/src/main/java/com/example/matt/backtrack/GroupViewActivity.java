@@ -121,12 +121,13 @@ public class GroupViewActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 groups.setText("Groups \n");
                 if (dataSnapshot.exists()) {
+                    if(mAuth.getCurrentUser()!=null){
                     DataSnapshot ds2 = dataSnapshot.child("users").child(mAuth.getCurrentUser().getUid()).child("groups");
                     for (DataSnapshot snap : ds2.getChildren()) {
                         String group_name = snap.getKey();
                         String group_uuid = snap.getValue(String.class);
                         groups.setText(groups.getText() + "\n" + group_name + "  :  " + group_uuid);
-                    }
+                    }}
                 }
             }
 
