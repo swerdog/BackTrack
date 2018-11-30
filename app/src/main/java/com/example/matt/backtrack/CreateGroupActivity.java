@@ -35,6 +35,7 @@ public class CreateGroupActivity extends AppCompatActivity {
     private EditText editGroupName;
     Button copy_button;
     int n;
+    String s="";
 
 
     @Override
@@ -60,8 +61,14 @@ public class CreateGroupActivity extends AppCompatActivity {
             public void onClick(View v) {
                 click = true;
                 Random r = new Random();
+                String possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
                 n = 100000 + r.nextInt(900000);
-                String s = String.valueOf(n);
+                String text="";
+                s = String.valueOf(n);
+                for (int i = 0; i < 10; i++) {
+                    text+=(possible.charAt(r.nextInt(possible.length())));
+                }
+                s = s+text;
                 txt.setText(s);
                 butn.setEnabled(false);
 
@@ -188,7 +195,7 @@ public class CreateGroupActivity extends AppCompatActivity {
         DatabaseReference myRefUsers = database.getReference("users");
         DatabaseReference myRefGroups = database.getReference("groups");
 
-        String g = ""+n;
+        String g = ""+s;
         myRefUsers.child(mAuth.getCurrentUser().getUid()).child("groups").child(result).setValue(g);
         myRefGroups.child(result).setValue(g);
 

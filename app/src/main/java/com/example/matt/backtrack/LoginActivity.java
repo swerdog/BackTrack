@@ -97,6 +97,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         });
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
+
+
+
     }
     private void populateAutoComplete() {
         /*if (!mayRequestContacts()) {
@@ -159,6 +162,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 });
         return true;
     }
+
     private Boolean signIn(String email, String password) {
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -183,7 +187,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     }
     /**
      * Attempts to sign in or register the account specified by the login form.
-     * If there are form errors (invalid email, missing fields, etc.), the
+     * If there are form errors (invalid email, missing fields, etcf.), the
      * errors are presented and no actual login attempt is made.
      */
     private void attemptLogin() {
@@ -197,16 +201,28 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         String email = mEmailView.getText().toString();
         String password = mPasswordView.getText().toString();
         boolean cancel = false;
-        View focusView = null;
+        View focusView = mLoginFormView;
+        if (TextUtils.isEmpty(password) || !isPasswordValid(password)) {
+            mPasswordView.setError(getString(R.string.error_invalid_password));
+            focusView = mPasswordView;
+            cancel = true;
+        }
+        if (TextUtils.isEmpty(email)) {
+            mEmailView.setError(getString(R.string.error_field_required));
+            focusView = mEmailView;
+            cancel = true;
+        } else if (!isEmailValid(email)) {
+            mEmailView.setError(getString(R.string.error_invalid_email));
+            focusView = mEmailView;
+            cancel = true;
+        }
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        if (user == null) {
+        if (cancel) {
             // There was an error; don't attempt login and focus the first
             // form field with an error.
-//            focusView.requestFocus();
-            showProgress(true);
-            mAuthTask = new UserLoginTask(email, password);
-            mAuthTask.execute((Void) null);
-            signIn(email, password);
+           focusView.requestFocus();
+            Toast.makeText(LoginActivity.this, "Error Signing In",
+                    Toast.LENGTH_SHORT).show();
         } else {
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.

@@ -13,6 +13,20 @@
                       <PersistentState>
                         <option name="children">
                           <map>
+                            <entry key="actionbar">
+                              <value>
+                                <PersistentState>
+                                  <option name="values">
+                                    <map>
+                                      <entry key="assetType" value="IMAGE" />
+                                      <entry key="imageAsset" value="$USER_HOME$/Downloads/clipart432262.png" />
+                                      <entry key="theme" value="HOLO_DARK" />
+                                      <entry key="themeColor" value="00574b" />
+                                    </map>
+                                  </option>
+                                </PersistentState>
+                              </value>
+                            </entry>
                             <entry key="launcher">
                               <value>
                                 <PersistentState>
@@ -51,6 +65,11 @@
                                 </PersistentState>
                               </value>
                             </entry>
+                          </map>
+                        </option>
+                        <option name="values">
+                          <map>
+                            <entry key="outputIconType" value="ACTIONBAR" />
                           </map>
                         </option>
                       </PersistentState>
