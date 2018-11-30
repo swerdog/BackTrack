@@ -15,7 +15,7 @@
     <string name="title_activity_tracker">activity_tracker</string>
     <string name="location_access">Location Access</string>
     <string name="view_map">View Map</string>
-    <string name="title_activity_second">Profile</string>
+    <string name="title_activity_second">BackTrack</string>
     <string name="title_activity_maps">Map</string>
     <string name="title_activity_join">Join Group</string>
     <string name="title_activity_create_group">Create Group</string>
@@ -24,4 +24,8 @@
     <string name="go">Go</string>
     <string name="group_id">group ID</string>
     <string name="GroupID">Enter group ID</string>
+    <string name="username">Name</string>
+    <string name="title_activity_login2">Sign in</string>
+    <string name="title_activity_register">Register</string>
+
 </resources>
