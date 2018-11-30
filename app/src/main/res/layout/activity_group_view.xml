@@ -29,7 +29,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="400dp"
+        android:layout_marginTop="350dp"
         android:gravity="bottom"
         android:orientation="vertical">
 
@@ -43,7 +43,7 @@
             android:textColorHint="#ffff"
             android:textColor="#ffff"
             android:inputType="text"
-            android:textColor="#ffff"
+
             android:label="@string/group_id"
             android:maxLines="1"
             android:singleLine="true"
@@ -54,10 +54,20 @@
             android:id="@+id/groupMapButton"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+
             android:text="View Map"
             android:textColor="#ffff"
             android:background="@drawable/button_generate_id"
             android:visibility="visible" />
+
+        <Button
+            android:layout_marginTop="20dp"
+            android:id="@+id/buttonDelete"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_generate_id"
+            android:textColor="#ffff"
+            android:text="Remove from Group" />
 
     </LinearLayout>
 
