@@ -10,6 +10,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -204,20 +205,32 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
     @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event)
+    {
+        if ((keyCode == KeyEvent.KEYCODE_BACK))
+        {
+            MapsActivity.this.finish();
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
+    @Override
     public void onLocationChanged(Location location) {
         mMap.clear();
         mAuth = FirebaseAuth.getInstance();
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("users");
         Log.w("Location", "Location" + location.getLatitude());
-        myRef.child(mAuth.getCurrentUser().getUid()).child("latitude").setValue(location.getLatitude());
-        myRef.child(mAuth.getCurrentUser().getUid()).child("longitude").setValue(location.getLongitude());
+        if (mAuth.getCurrentUser()!=null) {
+            myRef.child(mAuth.getCurrentUser().getUid()).child("latitude").setValue(location.getLatitude());
+            myRef.child(mAuth.getCurrentUser().getUid()).child("longitude").setValue(location.getLongitude());
 //        TextView text_lat = (TextView) findViewById(R.id.text_view_latitude);
 //        TextView text_long = (TextView) findViewById(R.id.text_view_longitude);
 //        text_lat.setText("" + location.getLatitude() + ",   ");
 //        text_long.setText("" + location.getLongitude());
-        this.latitude = location.getLatitude();
-        this.longitude = location.getLongitude();
+            this.latitude = location.getLatitude();
+            this.longitude = location.getLongitude();
+        }
 
 
 
