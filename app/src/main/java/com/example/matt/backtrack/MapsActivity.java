@@ -10,6 +10,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -19,6 +20,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -68,6 +70,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private double  latitude = 0;
     private double longitude = 0;
     private GoogleMap mMap;
+    private Marker mark;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,6 +96,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                mMap.clear();
                 for (DataSnapshot ds : dataSnapshot.getChildren()) {
                     //each ds represents a user!!
                     String a = ds.getKey();
@@ -201,22 +205,33 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
     @Override
-    public void onLocationChanged(Location location) {
+    public boolean onKeyDown(int keyCode, KeyEvent event)
+    {
+        if ((keyCode == KeyEvent.KEYCODE_BACK))
+        {
+            MapsActivity.this.finish();
+        }
+        return super.onKeyDown(keyCode, event);
+    }
 
+    @Override
+    public void onLocationChanged(Location location) {
+        mMap.clear();
         mAuth = FirebaseAuth.getInstance();
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("users");
         Log.w("Location", "Location" + location.getLatitude());
-        myRef.child(mAuth.getCurrentUser().getUid()).child("latitude").setValue(location.getLatitude());
-        myRef.child(mAuth.getCurrentUser().getUid()).child("longitude").setValue(location.getLongitude());
+        if (mAuth.getCurrentUser()!=null) {
+            myRef.child(mAuth.getCurrentUser().getUid()).child("latitude").setValue(location.getLatitude());
+            myRef.child(mAuth.getCurrentUser().getUid()).child("longitude").setValue(location.getLongitude());
 //        TextView text_lat = (TextView) findViewById(R.id.text_view_latitude);
 //        TextView text_long = (TextView) findViewById(R.id.text_view_longitude);
 //        text_lat.setText("" + location.getLatitude() + ",   ");
 //        text_long.setText("" + location.getLongitude());
-        this.latitude = location.getLatitude();
-        this.longitude = location.getLongitude();
+            this.latitude = location.getLatitude();
+            this.longitude = location.getLongitude();
+        }
 
-//        mMap.clear();
 
 
 
@@ -226,7 +241,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         mp.title("my position");
 
-        mMap.addMarker(mp);
+        mark = mMap.addMarker(mp);
 
         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(
                 new LatLng(location.getLatitude(), location.getLongitude()), 16));
