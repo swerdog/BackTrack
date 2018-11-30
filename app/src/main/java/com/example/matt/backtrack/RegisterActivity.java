@@ -153,7 +153,7 @@ public class RegisterActivity extends AppCompatActivity {
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w("", "createUserWithEmail:failure", task.getException());
-                            Toast.makeText(RegisterActivity.this, "Registration failed. Cannot create account with existing email",
+                            Toast.makeText(RegisterActivity.this, "Registration failed.",
                                     Toast.LENGTH_SHORT).show();
                         }
                         // ...
