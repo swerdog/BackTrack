@@ -48,6 +48,12 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 
+import android.support.design.widget.TextInputEditText;
+import android.support.design.widget.TextInputLayout;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 
 
 public class UpdatePasswordActivity extends AppCompatActivity {
@@ -55,6 +61,9 @@ public class UpdatePasswordActivity extends AppCompatActivity {
     public static final String TAG = "Message";
 
     private String password;
+
+    TextInputLayout oldPassword,newPassword;
+    TextInputEditText oldPasswordText, newPasswordText;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,8 +72,11 @@ public class UpdatePasswordActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
 
-        EditText text = (EditText) findViewById(R.id.newPasswordText);
-        password = text.getText().toString();
+//        EditText text = (EditText) findViewById(R.id.newPasswordText);
+//        password = text.getText().toString();
+
+        newPasswordText = (TextInputEditText) findViewById(R.id.newPasswordText);
+        newPassword = (TextInputLayout) findViewById(R.id.newPassword);
 
 
         Button button = (Button) findViewById(R.id.submitPassword);
@@ -72,6 +84,10 @@ public class UpdatePasswordActivity extends AppCompatActivity {
         {
             public void onClick (View v){
                 changePassowrd(v);
+                Snackbar.make(v, "Password Change Successful", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+
+
             }
         });
 
@@ -82,12 +98,15 @@ public class UpdatePasswordActivity extends AppCompatActivity {
     {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
-        user.updatePassword(password)
+        user.updatePassword(newPasswordText.getText().toString())
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(Task<Void> task) {
                         if (task.isSuccessful()) {
                             Log.d(TAG, "User password updated.");
+                        }
+                        else {
+                            Log.d(TAG, "Error password not updated");
                         }
                     }
                 });
