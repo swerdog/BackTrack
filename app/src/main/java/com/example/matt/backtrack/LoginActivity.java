@@ -214,7 +214,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             cancel = true;
         }
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        if (user != null||cancel) {
+        if (cancel) {
             // There was an error; don't attempt login and focus the first
             // form field with an error.
            focusView.requestFocus();

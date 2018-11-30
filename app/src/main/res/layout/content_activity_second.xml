@@ -123,10 +123,10 @@
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:clickable="true"
-        app:backgroundTint="@color/colorPrimary"
+        app:backgroundTint="@color/colorPrimaryDark"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/viewGroup"
-        app:srcCompat="@drawable/baseline_settings_black_18dp" />
+        app:srcCompat="@drawable/ic_action_name" />
 
 </android.support.constraint.ConstraintLayout>
